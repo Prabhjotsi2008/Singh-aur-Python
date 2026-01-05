@@ -51,3 +51,39 @@ reload(hello_chai) # it reloads the changes made
 ``` python
 hello_chai.chai_one # 'lemon tea'
 ```
+
+--- 
+
+# Mutable and Immutable in Python
+* When we create a variable as:
+``` python
+username = "Prabh"
+```
+* A memory is allocated which contains value `"Prabh"`
+* While `username` points towards that allocated memory
+
+## Mutable Types
+* Value can be changed, means the `actual value allocated in the memory` (not the one pointed to)
+* Examples : `list`, `dict`, `set`, `bytearray`, and `most user-defined classes`
+
+## Immutable Types
+* The value `allocated in the memory` cannot be changed
+* However we can change the value `pointed by the variable`
+* Examples : `int`, `float`, `bool`, `string (str)`, `tuple`, `frozenset`, `bytes`
+
+## EXAMPLE CODE :
+``` python
+x = 10 # memory allocated with value "10" # x points to the allocated memory
+y = x # y also points to the same memory address as x
+
+print(x) # 10
+print(y) # 10
+
+x = 15 # Now a new memory with value "15" is created and x points to this memory address
+
+print(x) # 15
+print(y) # 10 # as y still points to "10"
+```
+
+> In Python, variables are references to objects.
+Mutable objects can be modified in place, while immutable objects require creation of a new object upon modification.
