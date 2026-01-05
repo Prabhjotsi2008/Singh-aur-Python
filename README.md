@@ -87,3 +87,25 @@ print(y) # 10 # as y still points to "10"
 
 > In Python, variables are references to objects.
 Mutable objects can be modified in place, while immutable objects require creation of a new object upon modification.
+
+## Data-types (Object-types)
+
+- Number : `1234`, `3.14`, `3+4j`, `0b111`, `Decimal()`, `Fraction()`
+
+- String : `'spam'`, `"Bob's"`, `b'a\x01c'`, `u'sp\xc4m'`
+
+- List : `[1, 2, 3]`, `['abc', 2, 4.5, [3, 4]]`, `list(range(10))`
+
+- Tuple : `(1, 2, 3)`, `('abc', 2, 4.5, (3, 4))`, `tuple("spam")`
+
+- Dictionary : `{'food': 'Spam', 'quantity': 4, 'color': 'pink'}`, `dict(food='Spam', quantity=4, color='pink')`
+
+- Set : `{'spam', 'eggs'}`, `set(['spam', 'eggs'])`, `set(range(5))`
+
+- Files : `open('data.txt')`, `open(r'c:\path\to\file.txt', 'r')`
+
+- Boolean : `True`, `False`
+- NoneType : `None`
+- Functions, modules, classes
+
+- Advance : `decorators`, `generators`, `iterators`, `MetaProgramming`
