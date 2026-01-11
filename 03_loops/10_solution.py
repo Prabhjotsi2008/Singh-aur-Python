@@ -16,11 +16,11 @@ while True: # attempts <= max_retries can also be done
         print("Invalid password in 5 attempts!!!")
         print("Access Denied!!!")
         break
-    # print(f"Attempts : {attempts}, Wait-Time : {wait_time} secs")
+    print(f"Attempts : {attempts}, Wait-Time : {wait_time} secs")
     print(f"Try again after {wait_time} secs")
     time.sleep(wait_time)
     wait_time *= 2
     attempts += 1
 
 
-# print("Program END")
+print("Program END")
