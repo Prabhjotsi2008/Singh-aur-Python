@@ -248,3 +248,23 @@ Iteration in Python is driven by protocols, not syntax
     - `__next__()`
 
     - `StopIteration`
+
+- When we write:
+``` python
+myList = [1,2,3,4]
+for l in myList:
+    print(l)
+```
+
+- Internally, it is done as:
+``` python
+I = iter(myList) # Step 1: create an iterator
+while True: # Step 2: keeps pulling values
+    try:
+        x = next(I) # calls __next__()
+    except StopIteration:  # Step 3: end of iteration
+        break
+    print(x)
+```
+
+- Due to this, we are able to iterate over list (`iterable` not `iterator`) again and again, unlike in `file`
