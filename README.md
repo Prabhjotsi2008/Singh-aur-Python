@@ -109,3 +109,142 @@ Mutable objects can be modified in place, while immutable objects require creati
 - Functions, modules, classes
 
 - Advance : `decorators`, `generators`, `iterators`, `MetaProgramming`
+
+---
+
+# BTS of Iteration
+
+## COMPONENTS
+- **Iteration Tool :** The tools used for iterating over a data *e.g.* `for`, `comprehesion (list or dict-comprehension)`, `map`, `while`
+
+- **Iterable Objects :** The data structure on which iteration is done *e.g.* `list`, `dict`, `set`, `file`
+
+- **`__next__`** or **`next()`** : This method returns the next value from the iterator.
+If no further values are present, it raises the `StopIteration` exception, signaling the end of iteration.
+
+
+## WORKFLOW
+- `iterable tool` sends a method `iter()` to the `iterable object`, `iter()` has the first memory reference of `iterable object`
+
+- The `iterator object` provides values one by one using `__next__()` or `next()`.
+
+- When all values are exhausted, a `StopIteration` exception is raised, indicating the `end of the iterable object.`
+
+## Example CODE
+```
+>>> myList = [1,2,3,4]
+>>> I = iter(myList) # points to first memory reference
+>>> I
+<list_iterator object at 0x000001F7A36A0C10>
+>>> print(I)
+<list_iterator object at 0x000001F7A36A0C10>
+>>> I.__next__()
+1
+>>> I # memory reference remains same
+<list_iterator object at 0x000001F7A36A0C10> # signifies that iter() always point to the first memory reference
+>>> I.__next__()
+2
+>>> I.__next__()
+3
+>>> I.__next__()
+4
+>>> I.__next__() # throws error as end reached
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+    I.__next__()
+    ~~~~~~~~~~^^
+StopIteration
+```
+> The iterator object remains the same, but its internal position moves forward after each __next__() call.
+
+## FILE-HANDLING
+
+1. `General Method` *using readline()*
+```
+>>> f = open("chai.py")
+>>> f.readline()
+'import time\n'
+>>> f.readline()
+'print("chai is here")\n'
+>>> f.readline()
+'username = "hitesh"\n'
+>>> f.readline()
+'print(username)'
+>>> f.readline()
+''
+>>> f.readline()
+''
+```
+- It is able to handle end of file `without raising an exception`
+- It gived `'' (empty string)` signifying `end of file`
+
+2. `Raw Method` *using __next__()*
+```
+>>> f = open("chai.py")
+>>> f.__next__()
+'import time\n'
+>>> f.__next__()
+'print("chai is here")\n'
+>>> f.__next__()
+'username = "hitesh"\n'
+>>> f.__next__()
+'print(username)'
+>>> f.__next__()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+    f.__next__()
+    ~~~~~~~~~~^^
+StopIteration
+```
+- Directly uses the iterator protocol
+- Since it is a `raw method`, so the termination (end) of file is `not handled nicely`
+- It raises `StopIteration` once EOF is reached
+
+3. `LOOP`in file
+- `CODE:`
+``` python
+f = open("chai.py")
+# for loop
+for line in f:
+    print(line, end="")
+# while loop
+while True:
+    line = file.readline()
+    if not line: break
+    print(line,end="")
+# both loop gives same output (just different syntax)
+```
+> `for` loop internally uses `iter()` and `next()`
+
+- `OUTPUT:`
+```
+import time
+print("chai is here")
+username = "hitesh"
+print(username)
+```
+
+4. `iter()` in `FILE HANDLING`
+```
+>>> f = open("chai.py")
+>>> iter(f) is f # iter(f) is same as f for FILES only 
+True # bcoz open() itself does iter() in BTS
+>>> iter(f) is f.__iter__()
+True
+```
+- File objects are `self-iterators`
+
+- `open()` already prepares the file object for iteration
+
+- Unlike lists, `iter(f)` returns the same object
+
+## FINAL TAKE
+Iteration in Python is driven by protocols, not syntax
+
+- for loops, file reading, generators, and comprehensions all rely on:
+
+    - `__iter__()`
+
+    - `__next__()`
+
+    - `StopIteration`
