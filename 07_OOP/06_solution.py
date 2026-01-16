@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # ClASS VARIABLE
+=======
+# POLYMORPHISM # ANEK-ROOP
+>>>>>>> 990fc99fadf8576eebf5f03c42e394e1f2ee729a
 
 class Car:
     total_car = 0 # made a varible for car-count
